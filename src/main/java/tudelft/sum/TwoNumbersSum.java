@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 // Source: https://leetcode.com/problems/add-two-numbers/description/
-class TwoNumbersSum {
+public class TwoNumbersSum {
 
     public ArrayList<Integer> addTwoNumbers(ArrayList<Integer> first, ArrayList<Integer> second) {
         Collections.reverse(first);
@@ -13,7 +13,9 @@ class TwoNumbersSum {
         int complement = 0;
         ArrayList<Integer> result = new ArrayList<>();
 
-        for(int i = 0; i < Math.max(first.size(), second.size()); i++){
+        int maxNumberOfDigitsPlusOne = Math.max(first.size(), second.size());
+
+        for(int i = 0; i <= maxNumberOfDigitsPlusOne; i++){
             int firstVal = i < first.size() ? first.get(i) : 0;
             int secondVal = i < second.size() ? second.get(i) : 0;
             int total = firstVal + secondVal + complement;
@@ -22,6 +24,9 @@ class TwoNumbersSum {
                 complement = 1;
                 total -= 10;
             }
+
+            if (total == 0 && i == maxNumberOfDigitsPlusOne) break;
+
             result.add(i, total);
         }
 
